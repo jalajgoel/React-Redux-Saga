@@ -1,16 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { requestHome } from '../../appRedux/actions/homeAction';
+import { requestApi } from '../../appRedux/actions/homeAction';
 
 class Home extends React.Component{
     componentDidMount() {
-        this.props.requestHome();
+        this.props.requestApi();
     }
 
+    showData = (x, i) => (
+        <div key={i}>
+            {x.email}
+        </div>
+    )
     render(){
-        const { homeReducer } = this.props;
-        return <h1>{homeReducer}</h1>;
+        const { data = [data.users = []], success } = this.props.homeReducer;
+        return (
+            <div>
+                {
+                    success ?
+                        (data !== null) ?
+                        data.users.length>0 ?
+                            data.users.map(this.showData)
+                            : "No data"
+                        : "Loading"
+                    : "Loading"
+                }
+            </div>
+        )
     }
 }
 
@@ -20,4 +36,4 @@ const mapStateToProps = state => ({
 
 // const mapDispatchToProps = dispatch => bindActionCreators(requestHome, dispatch)
 
-export default connect(mapStateToProps, { requestHome })(Home)
+export default connect(mapStateToProps, { requestApi })(Home)

@@ -1,4 +1,5 @@
 import * as types from '../types';
 
-export const requestHome = () => ({type: types.REQUEST_HOME_SUCCESS})
-export const receiveHome = (text) => ({type: types.RECEIVE_HOME_SUCCESS, text})
+export const requestApi = () => ({type: types.RECEIVE_API_LOADING})
+export const receiveApi = (data) => ({type: types.RECEIVE_API_SUCCESS, data})
+export const errorApi = (data) => ({type: types.RECEIVE_API_ERROR, data})
